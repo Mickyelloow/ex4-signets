@@ -19,7 +19,7 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
         <DialogContent>
           <TextField
             autoFocus
-            margin="dense"
+            margin="normal"
             id="nomDossier"
             label="Nom du dossier"
             type="text"
@@ -27,24 +27,32 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
             onChange={(e) => setNom(e.target.value)}
           />
           <TextField
-            margin="dense"
+            margin="normal"
             id="urlImage"
             label="Adresse de l'image de couverture"
             type="text"
             fullWidth
             onChange={(e) => setCouverture(e.target.value)}
           />
-          <TwitterPicker 
+          <TwitterPicker
             width="100%" 
             triangle="hide" 
             onChangeComplete={(couleur, e) => setCouleur(couleur.hex)}
+            colors={[
+              "#537169",
+              "#55BBB2",
+              "#F6D2A3",
+              "#F3D379",
+              "#FB7778",
+              "#5990B8"
+            ]}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={()=>setOuvert(false)} color="primary">
+          <Button onClick={()=>setOuvert(false)} style={{backgroundColor: "#990000", color: "white"}}>
             Annuler
           </Button>
-          <Button onClick={() => nom !== '' && gererAjout(nom, couverture, couleur)} color="primary">
+          <Button onClick={() => nom !== '' && gererAjout(nom, couverture, couleur)} style={{backgroundColor: "#009900", color: "white"}}>
             Ajouter
           </Button>
         </DialogActions>
