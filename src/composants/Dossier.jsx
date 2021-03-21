@@ -2,6 +2,7 @@ import './Dossier.scss';
 import { IconButton } from '@material-ui/core';
 import SortIcon from '@material-ui/icons/Sort';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import couvertureDefaut from '../images/couverture.webp';
 export default function Dossier({id, nom, couleur, datemodif, couverture}) {
   return (
     <article className="Dossier" style={{backgroundColor: couleur}}>
@@ -9,10 +10,10 @@ export default function Dossier({id, nom, couleur, datemodif, couverture}) {
         <IconButton className="deplacer" aria-label="déplacer" disableRipple={true}>
           <SortIcon />
         </IconButton>
-        <img src={couverture} alt={nom}/>
+        <img src={couverture || couvertureDefaut} alt={nom || "Dossier sans nom"}/>
       </div>
       <div className="info">
-        <h2>{nom}</h2>
+        <h2>{nom || "Dossier sans nom"}</h2>
         <p>Modifié : {formaterDate(datemodif)}</p>
       </div>
       <IconButton className="modifier" aria-label="modifier" size="small">
