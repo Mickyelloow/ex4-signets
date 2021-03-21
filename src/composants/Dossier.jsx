@@ -1,9 +1,16 @@
 import './Dossier.scss'; 
-import { IconButton } from '@material-ui/core';
+import { IconButton, Menu, MenuItem } from '@material-ui/core';
 import SortIcon from '@material-ui/icons/Sort';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import couvertureDefaut from '../images/couverture.webp';
+import { useEffect, useState } from 'react';
+
 export default function Dossier({id, nom, couleur, datemodif, couverture}) {
+  const [menuModifier, setMenuModifier] = useState(null);
+  
+  const gererOuvrirMenu = (btn) => setMenuModifier(btn.currentTarget);
+  const gererFermerMenu = () => setMenuModifier(null);
+
   return (
     <article className="Dossier" style={{backgroundColor: couleur}}>
       <div className="couverture">
@@ -17,7 +24,17 @@ export default function Dossier({id, nom, couleur, datemodif, couverture}) {
         <p>Modifié : {formaterDate(datemodif)}</p>
       </div>
       <IconButton className="modifier" aria-label="modifier" size="small">
-        <MoreVertIcon />
+        <MoreVertIcon onClick={gererOuvrirMenu}/>
+        <Menu
+          id="modifier"
+          anchorEl = {menuModifier}
+          keepMounted
+          open={Boolean(menuModifier)}
+          onClose={gererFermerMenu}
+        >
+          <MenuItem onClick={gererFermerMenu}>Modifier</MenuItem>
+          <MenuItem onClick={gererFermerMenu}>Supprimer</MenuItem>
+        </Menu>
       </IconButton>
     </article>
   );
